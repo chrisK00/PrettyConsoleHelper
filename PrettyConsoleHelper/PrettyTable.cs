@@ -7,7 +7,7 @@ namespace PrettyConsoleHelper
 {
     public class PrettyTable
     {
-        private readonly IList<string> _headers;
+        private readonly List<string> _headers;
         private readonly IList<List<string>> _rows;
         private readonly string _columnSeparator;
         public int RowCount => _rows.Count;
@@ -74,6 +74,23 @@ namespace PrettyConsoleHelper
         }
 
         /// <summary>
+        /// Adds headers
+        /// </summary>
+        /// <param name="row"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        public void AddHeaders(params string[] headers)
+        {
+            if (_rows.Any())
+            {
+                throw new InvalidOperationException("You can only add headers while there are no rows");
+            }
+            _ = headers ?? throw new ArgumentNullException(nameof(headers), "No items");
+           
+            _headers.AddRange(headers.Select(x => $"{x}"));
+        }
+
+        /// <summary>
         /// Adds a new row
         /// </summary>
         /// <param name="row"></param>
@@ -87,7 +104,7 @@ namespace PrettyConsoleHelper
                 throw new ArgumentException($"Row items: {row.Length} has to match the length of headers: {_headers.Count}");
             }
 
-            _rows.Add(row.Select(x => x.ToString()).ToList());
+            _rows.Add(row.Select(x => $"{x}").ToList());
         }
 
         /// <summary>

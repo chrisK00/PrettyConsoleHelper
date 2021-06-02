@@ -7,8 +7,8 @@
     <Copyright>MIT</Copyright>
     <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleOutput</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
-    <PackageTags>ConsoleTable, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper</PackageTags>
-    <Version>1.0.4</Version>
+    <PackageTags>ConsoleTable, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console</PackageTags>
+    <Version>1.0.0</Version>
     <PackageReleaseNotes>Rename, default foreground colors</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
   </PropertyGroup>
