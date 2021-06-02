@@ -26,4 +26,5 @@ https://www.nuget.org/packages/PrettyConsoleOutput/
 
 ### Static InputHelper with methods for validation and parsing 
 - Use the Validate method in order to use attributes which you have probably seen before as data annotations. Theres also a generic overload in case you would like to parse in to a specific type. The input message is optional. `   var email = InputHelper.Validate(new EmailAddressAttribute(), "Enter email: ");`[![input.png](https://i.postimg.cc/8CWCj3JK/input.png)](https://postimg.cc/5H4JrsmL)
-- Having troubles parsing enums? Use the GetEnumInput() method.`var season = InputHelper.GetEnumInput<Season>();`[![enumexample.png](https://i.postimg.cc/26wgrVBx/enumexample.png)](https://postimg.cc/vg40v8h1)
+- Having troubles parsing enums? Use the GetEnumInput() method.`var season = InputHelper.GetEnumInput<Season>();`
+[![enumexample.png](https://i.postimg.cc/26wgrVBx/enumexample.png)](https://postimg.cc/vg40v8h1)
