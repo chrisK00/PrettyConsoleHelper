@@ -23,3 +23,6 @@ https://www.nuget.org/packages/PrettyConsoleOutput/
 ### Static PrettyConsole
 - `Write` and `WriteLine` methods with overloads for printing a char multiple times and color output. Default values are provided
 - You can also log an Error which will print the time, message and exception (if provied) ` PrettyConsole.LogError("Bad input", new ArgumentException());` [![errorlog.png](https://i.postimg.cc/nzd3ydF2/errorlog.png)](https://postimg.cc/VrC9MWb0)
+
+### Static InputHelper with methods for validation and parsing 
+- Use the Validate method in order to use attributes which you have probably seen before as data annotations. Theres also a generic overload in case you would like to parse in to a specific type. The input message is optional. `   var email = InputHelper.Validate(new EmailAddressAttribute(), "Enter email: ");`[![input.png](https://i.postimg.cc/8CWCj3JK/input.png)](https://postimg.cc/5H4JrsmL)
