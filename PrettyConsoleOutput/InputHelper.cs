@@ -32,6 +32,30 @@ namespace PrettyConsoleOutput
             }
         }
 
+        /// <summary>
+        ///  Loops until the user has succesfully entered a enum that exists inside the Generic enum type
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static TEnum GetEnumInput<TEnum>(string message = "Enter input: ") where TEnum : struct
+        {
+            if (!typeof(TEnum).IsSubclassOf(typeof(Enum)))
+            {
+                throw new ArgumentException("Not an enum");
+            }
+
+            while (true)
+            {
+                PrettyConsole.Write(message);
+                if (Enum.TryParse(Console.ReadLine(), true, out TEnum result))
+                {
+                    return result;
+                }
+                PrettyConsole.LogError($"Invalid input: enum must exist in: {typeof(TEnum).Name}");
+            }
+        }
+
         public static string Validate(ValidationAttribute validator, string message = "Enter input: ")
         {
             while (true)
