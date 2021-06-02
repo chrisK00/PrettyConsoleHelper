@@ -7,7 +7,7 @@ namespace PrettyConsoleOutput
 {
     public class PrettyTable
     {
-        private readonly string[] _headers;
+        private readonly IList<string> _headers;
         private readonly IList<List<string>> _rows;
         private readonly string _columnSeparator;
         public int RowCount => _rows.Count;
@@ -21,8 +21,23 @@ namespace PrettyConsoleOutput
         {
             _columnSeparator = columnSeparator;
             HeaderColor = headerColor;
-            _headers = headers;
+            _headers = new List<string>(headers);
             _rows = new List<List<string>>();
+        }
+
+        /// <summary>
+        /// Adds a header to the existing headers if there are no rows
+        /// </summary>
+        /// <param name="header"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public void AddHeader(string header)
+        {
+            if (_rows.Any())
+            {
+                throw new InvalidOperationException("You can only add headers while there are no rows");
+            }
+
+            _headers.Add(header);
         }
 
         /// <summary>
@@ -33,10 +48,10 @@ namespace PrettyConsoleOutput
         /// <exception cref="ArgumentException"></exception>
         public void AddRow(params string[] row)
         {
-            _ = row ?? throw new ArgumentNullException(nameof(row),"No items");
-            if (row.Length > _headers.Length || row.Length < _headers.Length)
+            _ = row ?? throw new ArgumentNullException(nameof(row), "No items");
+            if (row.Length > _headers.Count || row.Length < _headers.Count)
             {
-                throw new ArgumentException($"Row items: {row.Length} has to match the length of headers: {_headers.Length}");
+                throw new ArgumentException($"Row items: {row.Length} has to match the length of headers: {_headers.Count}");
             }
 
             _rows.Add(row.ToList());
@@ -63,10 +78,10 @@ namespace PrettyConsoleOutput
             var rows = GetFormattedRows(headers);
             var sb = new StringBuilder();
 
-            for (int i = 0; i <= rows.Count; i += _headers.Length)
+            for (int i = 0; i <= rows.Count; i += _headers.Count)
             {
                 sb.AppendLine($"{_columnSeparator.Trim()} " + string.Concat(
-                    rows.Take(_headers.Length)));
+                    rows.Take(_headers.Count)));
 
                 sb.Append('-', header.Length + 1);
                 sb.AppendLine();
@@ -78,7 +93,7 @@ namespace PrettyConsoleOutput
         private List<string> GetFormattedHeaders(List<int> columnLengths)
         {
             var headers = new List<string>();
-            for (int i = 0; i < _headers.Length; i++)
+            for (int i = 0; i < _headers.Count; i++)
             {
                 headers.Add(_headers[i].PadRight(columnLengths[i]) + _columnSeparator);
             }
@@ -91,7 +106,7 @@ namespace PrettyConsoleOutput
 
             foreach (var row in _rows)
             {
-                for (int i = 0; i < _headers.Length; i++)
+                for (int i = 0; i < _headers.Count; i++)
                 {
                     rows.Add(
                         row[i].PadRight(headers[i].Length - _columnSeparator.Length)
