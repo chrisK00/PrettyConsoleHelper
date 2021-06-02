@@ -21,6 +21,10 @@ https://www.nuget.org/packages/PrettyConsoleOutput/
 3. Print `table.Write();`     
 [![output.png](https://i.postimg.cc/wMX7tr1c/output.png)](https://postimg.cc/MfGWNdbv)
 
+#### Notes
+- **Options**: HeaderColor (default orange), Column Separator (default " | ")
+- Expect any values being null? No worries! You can even add headers and rows with null values if you wanted to test the table format
+
 ### Static PrettyConsole
 **Options**: WriteColor (default Yellow), WriteLineColor (default Cyan)
 - `Write` and `WriteLine` methods with overloads for printing a char multiple times, printing any type and color output aswell. Default values are provided
