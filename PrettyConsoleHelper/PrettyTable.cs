@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PrettyConsoleOutput
+namespace PrettyConsoleHelper
 {
     public class PrettyTable
     {
@@ -23,6 +23,39 @@ namespace PrettyConsoleOutput
             HeaderColor = headerColor;
             _headers = new List<string>(headers);
             _rows = new List<List<string>>();
+        }
+
+        private List<string> GetFormattedHeaders(List<int> columnLengths)
+        {
+            var headers = new List<string>();
+            for (int i = 0; i < _headers.Count; i++)
+            {
+                headers.Add(_headers[i].PadRight(columnLengths[i]) + _columnSeparator);
+            }
+            return headers;
+        }
+
+        private List<string> GetFormattedRows(List<string> headers)
+        {
+            var rows = new List<string>();
+
+            foreach (var row in _rows)
+            {
+                for (int i = 0; i < _headers.Count; i++)
+                {
+                    rows.Add(
+                        row[i].PadRight(headers[i].Length - _columnSeparator.Length)
+                        + _columnSeparator);
+                }
+            }
+            return rows;
+        }
+
+        private List<int> GetColumnLengths()
+        {
+            return _headers.Select((header, i) =>
+           _rows.Select(row => row[i].Length)
+           .Max()).ToList();
         }
 
         /// <summary>
@@ -58,6 +91,15 @@ namespace PrettyConsoleOutput
         }
 
         /// <summary>
+        /// Removes the headers and rows
+        /// </summary>
+        public void ResetTable()
+        {
+            _headers.Clear();
+            _rows.Clear();
+        }
+
+        /// <summary>
         /// Outputs the table to the console
         /// </summary>
         /// <exception cref="InvalidOperationException"></exception>
@@ -88,39 +130,6 @@ namespace PrettyConsoleOutput
             }
 
             Console.WriteLine(sb.ToString());
-        }
-
-        private List<string> GetFormattedHeaders(List<int> columnLengths)
-        {
-            var headers = new List<string>();
-            for (int i = 0; i < _headers.Count; i++)
-            {
-                headers.Add(_headers[i].PadRight(columnLengths[i]) + _columnSeparator);
-            }
-            return headers;
-        }
-
-        private List<string> GetFormattedRows(List<string> headers)
-        {
-            var rows = new List<string>();
-
-            foreach (var row in _rows)
-            {
-                for (int i = 0; i < _headers.Count; i++)
-                {
-                    rows.Add(
-                        row[i].PadRight(headers[i].Length - _columnSeparator.Length)
-                        + _columnSeparator);
-                }
-            }
-            return rows;
-        }
-
-        private List<int> GetColumnLengths()
-        {
-            return _headers.Select((header, i) =>
-           _rows.Select(row => row[i].Length)
-           .Max()).ToList();
         }
     }
 }

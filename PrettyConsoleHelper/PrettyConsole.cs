@@ -1,14 +1,33 @@
 ﻿using System;
 using System.Text;
 
-namespace PrettyConsoleOutput
+namespace PrettyConsoleHelper
 {
     public static class PrettyConsole
     {
-        public static void Write(string text, ConsoleColor color = ConsoleColor.DarkYellow)
+        public static ConsoleColor WriteColor = ConsoleColor.Yellow;
+        public static ConsoleColor WriteLineColor = ConsoleColor.Cyan;
+
+        /// <summary>
+        /// Writes text to console using default console color
+        /// </summary>
+        /// <param name="text"></param>
+        public static void Write(string text)
+        {
+            Write(text, WriteColor);
+        }
+
+        public static void Write(string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;
             Console.Write(text);
+            Console.ResetColor();
+        }
+
+        public static void Write(object value, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(value);
             Console.ResetColor();
         }
 
@@ -19,9 +38,30 @@ namespace PrettyConsoleOutput
             Write(sb.ToString(), color);
         }
 
-        public static void WriteLine(string text, ConsoleColor color = ConsoleColor.Yellow)
+        /// <summary>
+        /// Writes text to console using default console color
+        /// </summary>
+        /// <param name="text"></param>
+        public static void WriteLine(string text)
+        {
+            WriteLine(text, WriteLineColor);
+        }
+
+        public static void WriteLine(string text, ConsoleColor color)
         {
             Write(text, color);
+            Console.WriteLine();
+        }
+
+        public static void WriteLine(object value)
+        {
+            Write(value, WriteLineColor);
+            Console.WriteLine();
+        }
+
+        public static void WriteLine(object value, ConsoleColor color)
+        {
+            Write(value, color);
             Console.WriteLine();
         }
 

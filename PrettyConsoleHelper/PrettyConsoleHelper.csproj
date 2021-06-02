@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,9 +7,10 @@
     <Copyright>MIT</Copyright>
     <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleOutput</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
-    <PackageTags>Consoletable, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper</PackageTags>
-    <Version>1.0.3</Version>
-    <PackageReleaseNotes>GetEnumInput()</PackageReleaseNotes>
+    <PackageTags>ConsoleTable, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper</PackageTags>
+    <Version>1.0.4</Version>
+    <PackageReleaseNotes>Rename, default foreground colors</PackageReleaseNotes>
+    <PackageId>PrettyConsoleHelper</PackageId>
   </PropertyGroup>
 
 </Project>

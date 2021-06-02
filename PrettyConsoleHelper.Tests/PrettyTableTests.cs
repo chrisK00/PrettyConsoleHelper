@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace PrettyConsoleOutput.Tests
+namespace PrettyConsoleHelper.Tests
 {
     public class PrettyTableTests
     {

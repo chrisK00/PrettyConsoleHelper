@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrettyConsoleOutput\PrettyConsoleOutput.csproj" />
+    <ProjectReference Include="..\PrettyConsoleHelper\PrettyConsoleHelper.csproj" />
   </ItemGroup>
 
 </Project>

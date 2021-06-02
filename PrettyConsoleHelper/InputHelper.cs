@@ -3,10 +3,12 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace PrettyConsoleOutput
+namespace PrettyConsoleHelper
 {
     public static class InputHelper
     {
+        public static ConsoleColor PromptColor = ConsoleColor.DarkYellow;
+
         /// <summary>
         /// Loops until the user has succesfully entered a integer
         /// </summary>
@@ -23,7 +25,7 @@ namespace PrettyConsoleOutput
 
             while (true)
             {
-                PrettyConsole.Write(message);
+                PrettyConsole.Write(message, PromptColor);
                 if (int.TryParse(Console.ReadLine(), out int input) && input <= maxValue && input >= minValue)
                 {
                     return input;
@@ -56,7 +58,7 @@ namespace PrettyConsoleOutput
 
             while (true)
             {
-                PrettyConsole.WriteLine($"Enter a {enumType.Name}", ConsoleColor.DarkYellow);
+                PrettyConsole.WriteLine($"Enter a {enumType.Name}", PromptColor);
                 PrettyConsole.Write(sb.ToString(), ConsoleColor.Yellow);
 
                 if (Enum.TryParse(Console.ReadLine(), true, out TEnum result))
@@ -71,7 +73,7 @@ namespace PrettyConsoleOutput
         {
             while (true)
             {
-                PrettyConsole.Write(message);
+                PrettyConsole.Write(message, PromptColor);
                 var input = Console.ReadLine();
                 if (validator.IsValid(input))
                 {
@@ -94,13 +96,13 @@ namespace PrettyConsoleOutput
 
             while (true)
             {
-                PrettyConsole.Write(message);
+                PrettyConsole.Write(message, PromptColor);
                 var input = Console.ReadLine();
 
                 if (!converter.IsValid(input))
                 {
                     PrettyConsole.LogError($"Invalid type convertion from: {input} to: {typeof(T)}");
-                    PrettyConsole.Write("Would you like to exit? (y/n): ");
+                    PrettyConsole.Write("Would you like to exit? (y/n): ", PromptColor);
 
                     if (Console.ReadLine().Trim().ToLower().StartsWith("y"))
                     {
