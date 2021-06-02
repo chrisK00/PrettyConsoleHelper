@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>chrisK00</Authors>
+    <Description>Library for Console apps with prettier and easier experience with output and input parsing/validating</Description>
+    <Copyright>MIT</Copyright>
+    <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleOutput</RepositoryUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageTags>Consoletable, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper</PackageTags>
   </PropertyGroup>
 
 </Project>
