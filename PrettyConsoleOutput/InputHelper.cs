@@ -43,7 +43,6 @@ namespace PrettyConsoleOutput
                     return input;
                 }
 
-                PrettyConsole.WriteLine($"Invalid input: {validator?.ErrorMessage}", ConsoleColor.Red);
                 PrettyConsole.LogError($"Invalid input: {validator?.ErrorMessage}");
             }
         }
