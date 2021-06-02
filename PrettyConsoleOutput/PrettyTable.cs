@@ -10,6 +10,7 @@ namespace PrettyConsoleOutput
         private readonly string[] _headers;
         private readonly IList<List<string>> _rows;
         private readonly string _columnSeparator;
+        public int RowCount => _rows.Count;
         public ConsoleColor HeaderColor { get; set; }
 
         public PrettyTable(params string[] headers) : this(" | ", ConsoleColor.DarkYellow, headers)
