@@ -46,7 +46,7 @@ namespace PrettyConsoleOutput
         /// <param name="row"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public void AddRow(params string[] row)
+        public void AddRow(params object[] row)
         {
             _ = row ?? throw new ArgumentNullException(nameof(row), "No items");
             if (row.Length > _headers.Count || row.Length < _headers.Count)
@@ -54,7 +54,7 @@ namespace PrettyConsoleOutput
                 throw new ArgumentException($"Row items: {row.Length} has to match the length of headers: {_headers.Count}");
             }
 
-            _rows.Add(row.ToList());
+            _rows.Add(row.Select(x => x.ToString()).ToList());
         }
 
         /// <summary>
@@ -78,10 +78,10 @@ namespace PrettyConsoleOutput
             var rows = GetFormattedRows(headers);
             var sb = new StringBuilder();
 
-            for (int i = 0; i <= rows.Count; i += _headers.Count)
+            for (int i = 0; i < rows.Count; i += _headers.Count)
             {
                 sb.AppendLine($"{_columnSeparator.Trim()} " + string.Concat(
-                    rows.Take(_headers.Count)));
+                    rows.Skip(i).Take(_headers.Count)));
 
                 sb.Append('-', header.Length + 1);
                 sb.AppendLine();
