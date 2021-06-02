@@ -64,7 +64,7 @@ namespace PrettyConsoleOutput
 
                 if (!converter.IsValid(input))
                 {
-                    PrettyConsole.WriteLine($"Invalid type convertion from: {input} to: {typeof(T)}", ConsoleColor.Red);
+                    PrettyConsole.LogError($"Invalid type convertion from: {input} to: {typeof(T)}");
                     PrettyConsole.Write("Would you like to exit? (y/n): ");
 
                     if (Console.ReadLine().Trim().ToLower().StartsWith("y"))
@@ -76,8 +76,10 @@ namespace PrettyConsoleOutput
                 {
                     return (T)converter.ConvertFromString(input);
                 }
-
-                PrettyConsole.LogError($"Invalid input: {validator?.ErrorMessage}");
+                else
+                {
+                    PrettyConsole.LogError($"Invalid input: {validator?.ErrorMessage}");
+                }
             }
         }
     }
