@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace PrettyConsoleOutput
 {
@@ -33,26 +34,36 @@ namespace PrettyConsoleOutput
         }
 
         /// <summary>
-        ///  Loops until the user has succesfully entered a enum that exists inside the Generic enum type
+        ///  Loops until the user has succesfully entered a enum that exists inside the Generic enum type. Case insensetive
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="message"></param>
-        /// <returns></returns>
-        public static TEnum GetEnumInput<TEnum>(string message = "Enter input: ") where TEnum : struct
+        /// <returns>Enum of the specified Type</returns>
+        public static TEnum GetEnumInput<TEnum>() where TEnum : struct
         {
-            if (!typeof(TEnum).IsSubclassOf(typeof(Enum)))
+            var enumType = typeof(TEnum);
+            if (!enumType.IsEnum)
             {
                 throw new ArgumentException("Not an enum");
             }
 
+            var sb = new StringBuilder();
+            foreach (var item in enumType.GetEnumNames())
+            {
+                sb.AppendLine(item);
+            }
+            sb.Append("> ");
+
             while (true)
             {
-                PrettyConsole.Write(message);
+                PrettyConsole.WriteLine($"Enter a {enumType.Name}", ConsoleColor.DarkYellow);
+                PrettyConsole.Write(sb.ToString(), ConsoleColor.Yellow);
+
                 if (Enum.TryParse(Console.ReadLine(), true, out TEnum result))
                 {
                     return result;
                 }
-                PrettyConsole.LogError($"Invalid input: enum must exist in: {typeof(TEnum).Name}");
+                PrettyConsole.LogError($"Invalid input: enum must exist in: {enumType.Name}");
             }
         }
 
