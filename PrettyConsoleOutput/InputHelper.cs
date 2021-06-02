@@ -32,11 +32,11 @@ namespace PrettyConsoleOutput
             }
         }
 
-        public static string Validate(ValidationAttribute validator)
+        public static string Validate(ValidationAttribute validator, string message = "Enter input: ")
         {
             while (true)
             {
-                PrettyConsole.Write("Enter input: ");
+                PrettyConsole.Write(message);
                 var input = Console.ReadLine();
                 if (validator.IsValid(input))
                 {
@@ -54,13 +54,13 @@ namespace PrettyConsoleOutput
         /// <typeparam name="T"></typeparam>
         /// <param name="validator"></param>
         /// <returns>If the type convertion is invalid and user chooses to exit the default value for T is returned</returns>
-        public static T Validate<T>(ValidationAttribute validator)
+        public static T Validate<T>(ValidationAttribute validator, string message = "Enter input: ")
         {
             var converter = TypeDescriptor.GetConverter(typeof(T));
 
             while (true)
             {
-                PrettyConsole.Write("Enter input: ");
+                PrettyConsole.Write(message);
                 var input = Console.ReadLine();
 
                 if (!converter.IsValid(input))
