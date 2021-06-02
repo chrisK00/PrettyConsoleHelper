@@ -6,7 +6,7 @@ A Library for Console apps that provides a prettier and easier experience with o
 Includes a InputHelper, ConsoleTable and ConsoleOutput
 
 https://www.nuget.org/packages/PrettyConsoleOutput/
-```Install-Package PrettyConsoleOutput -Version 1.0.0```
+```Install-Package PrettyConsoleOutput -Version 1.0.2```
 
 ## How to use
 ### Console table
