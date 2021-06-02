@@ -71,8 +71,8 @@ namespace PrettyConsoleOutput
             var columnLengths = GetColumnLengths();
             var headers = GetFormattedHeaders(columnLengths);
             var header = string.Concat(headers);
-            Console.Write($"{_columnSeparator.Trim()} ");
-            PrettyConsole.WriteLine(header);
+            PrettyConsole.Write($"{_columnSeparator.Trim()} ", HeaderColor);
+            PrettyConsole.WriteLine(header, HeaderColor);
             PrettyConsole.WriteLine('-', header.Length + 1);
 
             var rows = GetFormattedRows(headers);
