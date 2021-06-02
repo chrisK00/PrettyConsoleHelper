@@ -28,7 +28,7 @@ namespace PrettyConsoleOutput
                     return input;
                 }
 
-                PrettyConsole.WriteLine($"Invalid input: Max value: {maxValue} Min value: {minValue}", ConsoleColor.Red);
+                PrettyConsole.LogError($"Invalid input: Max value: {maxValue} Min value: {minValue}");
             }
         }
 
@@ -44,6 +44,7 @@ namespace PrettyConsoleOutput
                 }
 
                 PrettyConsole.WriteLine($"Invalid input: {validator?.ErrorMessage}", ConsoleColor.Red);
+                PrettyConsole.LogError($"Invalid input: {validator?.ErrorMessage}");
             }
         }
 
@@ -77,7 +78,7 @@ namespace PrettyConsoleOutput
                     return (T)converter.ConvertFromString(input);
                 }
 
-                PrettyConsole.WriteLine($"Invalid input: {validator?.ErrorMessage}", ConsoleColor.Red);
+                PrettyConsole.LogError($"Invalid input: {validator?.ErrorMessage}");
             }
         }
     }

@@ -32,5 +32,23 @@ namespace PrettyConsoleOutput
             Write(sb.ToString(), color);
             Console.WriteLine();
         }
+
+        /// <summary>
+        /// Logs an error to the console: [time]: message: error
+        /// </summary>
+        /// <param name="error"></param>
+        /// <param name="message"></param>
+        public static void LogError(string message, Exception ex = null)
+        {
+            var sb = new StringBuilder($"[{DateTime.Now.ToShortTimeString()}]: ");
+            sb.AppendLine(message);
+
+            if (ex != null)
+            {
+                sb.AppendLine(ex.ToString());
+            }
+           
+            WriteLine(sb.ToString(), ConsoleColor.Red);
+        }
     }
 }
