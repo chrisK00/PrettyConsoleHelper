@@ -9,7 +9,7 @@ namespace PrettyConsoleHelper
 
         public PrettyConsole(PrettyConsoleOptions options)
         {
-            Options = options;
+            Options = options ?? new PrettyConsoleOptions();
         }
 
         public PrettyConsole()
@@ -66,8 +66,8 @@ namespace PrettyConsoleHelper
 
         public void WriteLine(string text, ConsoleColor color)
         {
-                Write(text, color);
-                Console.WriteLine();
+            Write(text, color);
+            Console.WriteLine();
         }
 
         public void WriteLine(string text)

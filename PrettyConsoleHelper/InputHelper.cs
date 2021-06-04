@@ -11,7 +11,6 @@ namespace PrettyConsoleHelper
 
         public InputHelper(IPrettyConsole console)
         {
-            console.Options ??= new PrettyConsoleOptions();
             _console = console;
         }
 
@@ -112,7 +111,7 @@ namespace PrettyConsoleHelper
                 if (!converter.IsValid(input))
                 {
                     _console.LogError($"Invalid type convertion from: {input} to: {typeof(T)}");
-                    _console.Write("Would you like to exit? (y/n)", _console.Options.PromptColor, true);
+                    _console.Write("Would you like to exit? (y/n)", _console.Options.PromptColor, true);                         
 
                     if (_console.ReadLine().Trim().ToLower().StartsWith("y"))
                     {
