@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static PrettyConsoleHelper.PrettyStatic;
 
 namespace PrettyConsoleHelper
 {
@@ -130,9 +131,9 @@ namespace PrettyConsoleHelper
             var columnLengths = GetColumnLengths();
             var headers = GetFormattedHeaders(columnLengths);
             var header = string.Concat(headers);
-            PrettyConsole.Write($"{_columnSeparator.Trim()} ", HeaderColor);
-            PrettyConsole.WriteLine(header, HeaderColor);
-            PrettyConsole.WriteLine('-', header.Length + 1);
+            ConsolePretty.Write($"{_columnSeparator.Trim()} ", HeaderColor);
+            ConsolePretty.WriteLine(header, HeaderColor);
+            ConsolePretty.WriteLine('-', header.Length + 1);
 
             var rows = GetFormattedRows(headers);
             var sb = new StringBuilder();
