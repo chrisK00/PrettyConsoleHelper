@@ -3,69 +3,98 @@ using System.Text;
 
 namespace PrettyConsoleHelper
 {
-    public static class PrettyConsole
+    public class PrettyConsole : IPrettyConsole
     {
-        public static ConsoleColor WriteColor = ConsoleColor.Yellow;
-        public static ConsoleColor WriteLineColor = ConsoleColor.Cyan;
+        public PrettyConsoleOptions Options { get; set; }
 
-        /// <summary>
-        /// Writes text to console using default console color
-        /// </summary>
-        /// <param name="text"></param>
-        public static void Write(string text)
+        public PrettyConsole(PrettyConsoleOptions options)
         {
-            Write(text, WriteColor);
+            Options = options;
         }
 
-        public static void Write(string text, ConsoleColor color)
+        public PrettyConsole()
+        {
+            Options = new PrettyConsoleOptions();
+        }
+
+        public void Write(string text, bool prompt)
+        {
+            Write(text, Options.WriteColor, prompt);
+        }
+
+        public void Write(int value)
+        {
+            Write(value, Options.NumberColor);
+        }
+
+        public void Write(string text, ConsoleColor color, bool prompt)
         {
             Console.ForegroundColor = color;
-            Console.Write(text);
+            if (prompt)
+            {
+                Write(text, color);
+                Console.WriteLine();
+                Console.Write(Options.Prompt);
+            }
+            else
+            {
+                Console.Write(text);
+            }
             Console.ResetColor();
         }
 
-        public static void Write(object value, ConsoleColor color)
+        public void Write(object value, ConsoleColor color)
         {
             Console.ForegroundColor = color;
             Console.Write(value);
             Console.ResetColor();
         }
 
-        public static void Write(char value, int times, ConsoleColor color = ConsoleColor.White)
+        public void Write(int value, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(value);
+            Console.ResetColor();
+        }
+
+        public void Write(char value, int times, ConsoleColor color = ConsoleColor.White)
         {
             var sb = new StringBuilder();
             sb.Append(value, times);
             Write(sb.ToString(), color);
         }
 
-        /// <summary>
-        /// Writes text to console using default console color
-        /// </summary>
-        /// <param name="text"></param>
-        public static void WriteLine(string text)
+        public void WriteLine(string text, ConsoleColor color)
         {
-            WriteLine(text, WriteLineColor);
+                Write(text, color);
+                Console.WriteLine();
         }
 
-        public static void WriteLine(string text, ConsoleColor color)
+        public void WriteLine(string text)
         {
-            Write(text, color);
+            Write(text, Options.WriteLineColor);
             Console.WriteLine();
         }
 
-        public static void WriteLine(object value)
+        public void WriteLine(object value)
         {
-            Write(value, WriteLineColor);
+            Write(value, Options.WriteLineColor);
             Console.WriteLine();
         }
 
-        public static void WriteLine(object value, ConsoleColor color)
+        public void WriteLine(object value, ConsoleColor color)
         {
             Write(value, color);
             Console.WriteLine();
         }
 
-        public static void WriteLine(char value, int times, ConsoleColor color = ConsoleColor.White)
+        public void WriteLine(int value)
+        {
+            Write(value, Options.NumberColor);
+            Console.WriteLine();
+        }
+
+        public void WriteLine(char value, int times, ConsoleColor color = ConsoleColor.White)
         {
             var sb = new StringBuilder();
             sb.Append(value, times);
@@ -78,7 +107,7 @@ namespace PrettyConsoleHelper
         /// </summary>
         /// <param name="error"></param>
         /// <param name="message"></param>
-        public static void LogError(string message, Exception ex = null)
+        public void LogError(string message, Exception ex = null)
         {
             var sb = new StringBuilder($"[{DateTime.Now.ToShortTimeString()}]: ");
             sb.AppendLine(message);
@@ -87,8 +116,26 @@ namespace PrettyConsoleHelper
             {
                 sb.AppendLine(ex.ToString());
             }
-           
+
             WriteLine(sb.ToString(), ConsoleColor.Red);
+        }
+
+        public string ReadLine()
+        {
+            return Console.ReadLine() ?? "";
+        }
+
+        public void LogWarning(string message, Exception ex = null)
+        {
+            var sb = new StringBuilder($"[{DateTime.Now.ToShortTimeString()}]: ");
+            sb.AppendLine(message);
+
+            if (ex != null)
+            {
+                sb.AppendLine(ex.ToString());
+            }
+
+            WriteLine(sb.ToString(), ConsoleColor.Magenta);
         }
     }
 }
