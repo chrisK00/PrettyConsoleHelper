@@ -17,10 +17,10 @@ After adding more options and testing i have made the classes non static. But do
 - You can still customize it by simply doing `ConsolePretty.Options = new PrettyConsoleOptions(prompt:"->");` in this case i just changed the default prompt
 - `Write` and `WriteLine` methods with overloads for printing a char multiple times, printing any type and color output aswell. Default values are provided
 - You can also log an Error or Warning which will print the time, message and exception (if provied) `ConsolePretty.LogError("Bad input", new ArgumentException());` [![errorlog.png](https://i.postimg.cc/nzd3ydF2/errorlog.png)](https://postimg.cc/VrC9MWb0)
-- If you want your prompt with your choosen color to popup simply add `true` like this ` ConsolePretty.Write("Whats your name?", true);`[![true.png](https://i.postimg.cc/bv1Q3sW8/true.png)](https://postimg.cc/d7tk0tJS)
+- If you want your prompt with your choosen color to popup simply add `true` like this `ConsolePretty.Write("Whats your name?", true);`<br/> [![true.png](https://i.postimg.cc/bv1Q3sW8/true.png)](https://postimg.cc/d7tk0tJS)
 
 ### InputHelper with methods for validation and parsing 
-- Use the Validate method in order to use attributes which you have probably seen before as data annotations. Theres also a generic overload in case you would like to parse in to a specific type. The input message is optional. `var email = PrettyInputHelper.Validate(new EmailAddressAttribute(), "Enter email: ");`[![input.png](https://i.postimg.cc/8CWCj3JK/input.png)](https://postimg.cc/5H4JrsmL)
+- Use the Validate method in order to use attributes which you have probably seen before as data annotations. Theres also a generic overload in case you would like to parse in to a specific type. The input message is optional. `var email = PrettyInputHelper.Validate(new EmailAddressAttribute(), "Enter email: ");`<br/> [![input.png](https://i.postimg.cc/8CWCj3JK/input.png)](https://postimg.cc/5H4JrsmL)
 - Having troubles parsing enums? Use the GetEnumInput() method.`var season = PrettyInputHelper.GetEnumInput<Season>();`
 [![enumexample.png](https://i.postimg.cc/26wgrVBx/enumexample.png)](https://postimg.cc/vg40v8h1)
 
@@ -37,7 +37,7 @@ After adding more options and testing i have made the classes non static. But do
             {
                 table.AddRow(person.Id, person.Name, person);
             }`
-3. Print `table.Write();`     
+3. Print `table.Write();`<br/>     
 [![output.png](https://i.postimg.cc/wMX7tr1c/output.png)](https://postimg.cc/MfGWNdbv)
 
 ### PrettyConsole
