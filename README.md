@@ -42,6 +42,7 @@ After adding more options and testing i have made the classes non static. But do
 
 ### PrettyConsole
 **Options**: You can choose default coloring for lots of stuff by passing down PrettyConsoleOptions `var console = new PrettyConsole(new PrettyConsoleOptions(numberColor: ConsoleColor.Red));`
+- You can use this with dependency injection. Simply add it as a singleton `services.AddSingleton<IPrettyConsole, PrettyConsole>();`
 
 ### InputHelper
 **Options**: This can take in a PrettyConsole so that you are able to control the coloring and prompting!  `var console = new PrettyConsole(new PrettyConsoleOptions(numberColor: ConsoleColor.Red));
