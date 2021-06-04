@@ -5,8 +5,8 @@ A Library for Console apps that provides a prettier and easier experience with o
 
 Includes a InputHelper, ConsoleTable and ConsoleOutput
 
-https://www.nuget.org/packages/PrettyConsoleOutput/
-```Install-Package PrettyConsoleOutput -Version 1.0.2```
+https://www.nuget.org/packages/PrettyConsoleHelper/
+```Install-Package PrettyConsoleHelper```
 
 # How to use
 
@@ -28,7 +28,8 @@ After adding more options and testing i have made the classes non static. But do
 ## Non static classes
 
 ### Console table
-**Options**: HeaderColor (default orange), Column Separator (default " | ")
+- **Options**: HeaderColor (default orange), Column Separator (default " | ")
+- Expect any values being null? No worries! You can even add headers and rows with null values if you wanted to test the table format
 1. Create a new table
 `var table = new PrettyTable("Id", "Name", "Age");`
 2. Add Rows
@@ -45,5 +46,4 @@ After adding more options and testing i have made the classes non static. But do
 ### InputHelper
 **Options**: This can take in a PrettyConsole so that you are able to control the coloring and prompting!  `var console = new PrettyConsole(new PrettyConsoleOptions(numberColor: ConsoleColor.Red));
             var inputHelper = new InputHelper(console);`
-
 
