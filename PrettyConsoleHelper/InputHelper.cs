@@ -78,6 +78,35 @@ namespace PrettyConsoleHelper
             }
         }
 
+        /// <summary>
+        /// Loops until the user has succesfully entered a datetime
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="maxDateTime"></param>
+        /// <param name="minDateTime"></param>
+        /// <returns></returns>
+        public DateTime GetDateTime(string message = "Enter a date", DateTime? minDateTime = null, DateTime? maxDateTime = null)
+        {
+            DateTime minDate = minDateTime ?? DateTime.MinValue;
+            DateTime maxDate = maxDateTime ?? DateTime.MaxValue;
+
+            if (maxDate < minDate)
+            {
+                throw new ArgumentException($"Maxvalue {maxDate} cannot be less than {minDate}");
+            }
+
+            while (true)
+            {
+                _console.Write(message, _console.Options.PromptColor, true);
+                if (DateTime.TryParse(_console.ReadLine(), out DateTime dateTime) && dateTime <= maxDate && dateTime >= minDate)
+                {
+                    return dateTime;
+                }
+
+                _console.LogError($"Invalid input: Max value: {maxDate} Min value: {minDate}");
+            }
+        }
+
         public string Validate(ValidationAttribute validator, string message = "Enter input")
         {
             while (true)
