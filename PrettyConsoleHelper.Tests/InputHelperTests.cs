@@ -1,5 +1,5 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
+using System;
 using Xunit;
 
 
@@ -44,6 +44,25 @@ namespace PrettyConsoleHelper.Tests
 
             result.Should().BeOfType(typeof(int));
             result.Should().Be(returnValue);
+        }
+
+        [Fact]
+        public void GetDateTime_ReturnsParesedInput_WhenValidRange()
+        {
+            DateTime dateTime = new DateTime(2022, 9, 10);
+
+            _console.ReturnValue = dateTime.ToString();
+
+            var result = _subject.GetDateTime(minDateTime: new DateTime(2022, 1, 1), maxDateTime: new DateTime(2022, 12, 12));
+
+            result.Should().Be(dateTime);
+        }
+
+        [Fact]
+        public void GetDateTime_ThrowsArgumentException_When_InvalidRange()
+        {
+            FluentActions.Invoking(() => _subject.GetDateTime(minDateTime: new DateTime(2022, 12, 12), maxDateTime: new DateTime(2022, 1, 1)))
+              .Should().ThrowExactly<ArgumentException>();
         }
     }
 }
