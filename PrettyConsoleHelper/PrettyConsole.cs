@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace PrettyConsoleHelper
 {
     public class PrettyConsole : IPrettyConsole
     {
-        public PrettyConsoleOptions Options { get; set; }
+        public PrettyConsoleOptions Options { get; init; } = new();
 
         public PrettyConsole(PrettyConsoleOptions options)
         {
             Options = options ?? new PrettyConsoleOptions();
         }
+        
+        public PrettyConsole(IOptions<PrettyConsoleOptions> options)
+        {
+            Options = options.Value;
+        }
 
         public PrettyConsole()
         {
-            Options = new PrettyConsoleOptions();
         }
 
         public void Write(string text, bool prompt)
@@ -25,6 +30,11 @@ namespace PrettyConsoleHelper
         public void Write(int value)
         {
             Write(value, Options.NumberColor);
+        }
+
+        public void Write(string text)
+        {
+            Write(text, Options.WriteColor);
         }
 
         public void Write(string text, ConsoleColor color, bool prompt)

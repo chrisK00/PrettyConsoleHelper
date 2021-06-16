@@ -9,7 +9,7 @@ namespace PrettyConsoleHelper.Tests
             Options = new PrettyConsoleOptions();
         }
 
-        public PrettyConsoleOptions Options { get; set; }
+        public PrettyConsoleOptions Options { get; init; }
         public string ReturnValue { get; set; }
 
         public void LogError(string message, Exception ex = null)
@@ -56,6 +56,11 @@ namespace PrettyConsoleHelper.Tests
         public void Write(int value)
         {
             return;
+        }
+
+        public void Write(string text)
+        {
+            throw new NotImplementedException();
         }
 
         public void WriteLine(object value)

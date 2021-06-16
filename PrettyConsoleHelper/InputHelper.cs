@@ -67,8 +67,8 @@ namespace PrettyConsoleHelper
 
             while (true)
             {
-                _console.Write($"Enter a {enumType.Name}", _console.Options.PromptColor);
-                _console.Write(sb.ToString(), _console.Options.PromptColor, true);
+                _console.WriteLine($"Enter a {enumType.Name}", _console.Options.PromptColor);
+                _console.Write(sb.ToString(), true);
 
                 if (Enum.TryParse(_console.ReadLine(), true, out TEnum result))
                 {
