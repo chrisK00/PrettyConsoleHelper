@@ -3,13 +3,15 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Authors>chrisK00</Authors>
-    <Description>Library for Console apps with prettier and easier experience with output and input parsing/validating. Includes a Console table (rows and columns), Input helper and a console output class. Beginner friendly</Description>
+    <Description>Library for Console apps with prettier and easier experience with output and input parsing/validating. Includes a Console table (rows and columns), Input helper and a console output class. Beginner friendly and compatible with Dependency Injection</Description>
     <Copyright>MIT</Copyright>
-    <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleOutput</RepositoryUrl>
+    <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleHelper</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
-    <PackageTags>ConsoleTable, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner</PackageTags>
-    <Version>1.0.2</Version>
-    <PackageReleaseNotes>Now introducing PrettyConsoleOptions! Customize the pretty console and send it down to the input helper if youd like. I have wrapped them in a static class aswell if you dont want to bother customizing or you simply like the defaults.</PackageReleaseNotes>
+    <PackageTags>ConsoleTable, console table, PrettyConsoleOutput, Input helper, console output, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner, dependency injection</PackageTags>
+    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Now compatible with dependency injection and offers extension methods for ServiceCollection: services.AddPrettyConsoleHelper(); or services.AddPrettyConsoleHelper(options =&gt; {
+options.
+})</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
   </PropertyGroup>
 
