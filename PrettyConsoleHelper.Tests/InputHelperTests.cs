@@ -12,7 +12,7 @@ namespace PrettyConsoleHelper.Tests
 
     public class InputHelperTests
     {
-        readonly MockPrettyConsole _console = new MockPrettyConsole();
+        readonly MockPrettyConsole _console = new();
         readonly InputHelper _subject;
 
         public InputHelperTests()
@@ -49,7 +49,7 @@ namespace PrettyConsoleHelper.Tests
         [Fact]
         public void GetDateTime_ReturnsParesedInput_WhenValidRange()
         {
-            DateTime dateTime = new DateTime(2022, 9, 10);
+            DateTime dateTime = new(2022, 9, 10);
 
             _console.ReturnValue = dateTime.ToString();
 

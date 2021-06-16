@@ -26,7 +26,7 @@ namespace PrettyConsoleHelper
         /// <param name="maxValue"></param>
         /// <param name="minValue"></param>
         /// <returns></returns>
-        public int GetIntInput(string message = "Enter a whole number", int maxValue = int.MaxValue, int minValue = int.MinValue)
+        public int GetIntInput(string message = "Enter a whole number", int minValue = int.MinValue, int maxValue = int.MaxValue)
         {
             if (maxValue < minValue)
             {
@@ -107,6 +107,38 @@ namespace PrettyConsoleHelper
             }
         }
 
+        public string Validate(string message = "Enter input", params ValidationAttribute[] validators)
+        {
+            if (validators.Length < 1)
+            {
+                throw new ArgumentException("You need at least 1 validator");
+            }
+
+            while (true)
+            {
+                _console.Write(message, _console.Options.PromptColor, true);
+                var input = _console.ReadLine();
+                var errorsSb = new StringBuilder();
+                var hasErrors = false;
+                foreach (var validator in validators)
+                {
+                    if (!validator.IsValid(input))
+                    {
+                        hasErrors = true;
+                        errorsSb.Append(validator?.ErrorMessage);
+                    }
+                }
+
+                if (hasErrors)
+                {
+                    _console.LogError($"Invalid input: {errorsSb}");
+                    continue;
+                }
+
+                return input;
+            }
+        }
+
         public string Validate(ValidationAttribute validator, string message = "Enter input")
         {
             while (true)
@@ -140,7 +172,7 @@ namespace PrettyConsoleHelper
                 if (!converter.IsValid(input))
                 {
                     _console.LogError($"Invalid type convertion from: {input} to: {typeof(T)}");
-                    _console.Write("Would you like to exit? (y/n)", _console.Options.PromptColor, true);                         
+                    _console.Write("Would you like to exit? (y/n)", _console.Options.PromptColor, true);
 
                     if (_console.ReadLine().Trim().ToLower().StartsWith("y"))
                     {
