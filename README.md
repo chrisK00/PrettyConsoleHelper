@@ -52,7 +52,7 @@ After adding more options and testing i have made the classes non static. But do
 **Options**: You can specify all the normal PrettyConsoleOptions
 - InputHelper and IPrettyConsole can be dependency injected
 
-`class Menu
+` class Menu
     {
         private readonly IPrettyConsole _console;
         private readonly InputHelper _input;
@@ -89,6 +89,6 @@ After adding more options and testing i have made the classes non static. But do
         static void Main()
         {
             var serviceProvider = ConfigureServices().BuildServiceProvider();
-            serviceProvider.GetRequiredService<Menu>().Run();`
+            serviceProvider.GetRequiredService<Menu>().Run(); `
 [![dipretty.png](https://i.postimg.cc/1zNRTrW3/dipretty.png)](https://postimg.cc/Lq2MgLKc)
 
