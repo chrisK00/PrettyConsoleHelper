@@ -47,4 +47,48 @@ After adding more options and testing i have made the classes non static. But do
 ### InputHelper
 **Options**: This can take in a PrettyConsole so that you are able to control the coloring and prompting!  `var console = new PrettyConsole(new PrettyConsoleOptions(numberColor: ConsoleColor.Red));
             var inputHelper = new InputHelper(console);`
+            
+### Dependency injection
+**Options**: You can specify all the normal PrettyConsoleOptions
+- InputHelper and IPrettyConsole can be dependency injected
+
+`class Menu
+    {
+        private readonly IPrettyConsole _console;
+        private readonly InputHelper _input;
+
+        public Menu(IPrettyConsole console, InputHelper input)
+        {
+            _console = console;
+            _input = input;
+        }
+        public void Run()
+        {
+            _console.Write("y/n", true);
+            _console.WriteLine("It works!");
+            var num = _input.GetIntInput("Enter a num from 5 to 10", 5, 10);
+
+        }
+    }
+
+    class Program
+    {
+        static IServiceCollection ConfigureServices()
+        {
+            var services = new ServiceCollection();
+            services.AddPrettyConsoleHelper(opt =>
+            {
+                opt.PromptColor = ConsoleColor.DarkGreen;
+                opt.Prompt = "   >";
+            });
+
+            services.AddSingleton<Menu>();
+            return services;
+        }
+
+        static void Main()
+        {
+            var serviceProvider = ConfigureServices().BuildServiceProvider();
+            serviceProvider.GetRequiredService<Menu>().Run();`
+[![dipretty.png](https://i.postimg.cc/1zNRTrW3/dipretty.png)](https://postimg.cc/Lq2MgLKc)
 
