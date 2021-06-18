@@ -45,6 +45,19 @@ namespace PrettyConsoleHelper
             }
         }
 
+        public bool Confirm(string message = "Enter (y/n)")
+        {
+            _console.Write(message, true);
+
+            var input = Console.ReadLine().Trim().ToLower();
+
+            if (input == "y" || input == "yes")
+            {
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         ///  Loops until the user has succesfully entered a enum that exists inside the Generic enum type. Case insensetive
         /// </summary>
