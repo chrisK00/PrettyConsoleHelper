@@ -8,6 +8,6 @@ namespace PrettyConsoleHelper
         public ConsoleColor WriteLineColor { get; set; } = ConsoleColor.Cyan;
         public ConsoleColor NumberColor { get; set; } = ConsoleColor.DarkGreen;
         public ConsoleColor PromptColor { get; set; } = ConsoleColor.DarkYellow;
-        public string Prompt { get; set; } ="--> ";
+        public string Prompt { get; set; } =" >> ";
     }
 }
