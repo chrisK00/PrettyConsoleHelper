@@ -64,7 +64,7 @@ namespace PrettyConsoleHelper
         /// </summary>
         /// <param name="header"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void AddHeader(string header)
+        public PrettyTable AddHeader(string header)
         {
             if (_rows.Any())
             {
@@ -72,6 +72,7 @@ namespace PrettyConsoleHelper
             }
 
             _headers.Add(header);
+            return this;
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace PrettyConsoleHelper
         /// <param name="row"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
-        public void AddHeaders(params string[] headers)
+        public PrettyTable AddHeaders(params string[] headers)
         {
             if (_rows.Any())
             {
@@ -89,6 +90,7 @@ namespace PrettyConsoleHelper
             _ = headers ?? throw new ArgumentNullException(nameof(headers), "No items");
            
             _headers.AddRange(headers.Select(x => $"{x}"));
+            return this;
         }
 
         /// <summary>
