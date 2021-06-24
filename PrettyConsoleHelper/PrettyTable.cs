@@ -88,7 +88,7 @@ namespace PrettyConsoleHelper
                 throw new InvalidOperationException("You can only add headers while there are no rows");
             }
             _ = headers ?? throw new ArgumentNullException(nameof(headers), "No items");
-           
+
             _headers.AddRange(headers.Select(x => $"{x}"));
             return this;
         }
@@ -108,6 +108,29 @@ namespace PrettyConsoleHelper
             }
 
             _rows.Add(row.Select(x => $"{x}").ToList());
+        }
+
+        public PrettyTable AddRows<T>(IEnumerable<T> rows)
+        {
+            if (!rows.Any())
+            {
+                throw new ArgumentNullException(nameof(rows), "No items");
+            }
+
+            var properties = rows.FirstOrDefault().GetType().GetProperties();
+
+            if (properties.Length > _headers.Count || properties.Length < _headers.Count)
+            {
+                throw new ArgumentException($"Row items: {properties.Length} has to match the length of headers: {_headers.Count}");
+            }
+
+            foreach (var row in rows)
+            {
+                var values = properties.Select(x => x.GetValue(row));
+                _rows.Add(values.Select(x => $"{x}").ToList());
+            }
+
+            return this;
         }
 
         /// <summary>
