@@ -41,6 +41,11 @@ var email = PrettyInputHelper.Validate(new EmailAddressAttribute(), "Enter email
 1. Create a new table
 ```cs 
 var table = new PrettyTable("Id", "Name", "Age");
+``` 
+*or* 
+```cs
+var tbl = new PrettyTable()
+                .AddHeaders("id", "name");
 ```
 2. Add Rows
 ```cs 
