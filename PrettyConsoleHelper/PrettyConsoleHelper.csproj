@@ -8,10 +8,8 @@
     <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleHelper</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageTags>ConsoleTable, console table, PrettyConsoleOutput, Input helper, console output, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner, dependency injection</PackageTags>
-    <Version>1.0.3</Version>
-    <PackageReleaseNotes>Now compatible with dependency injection and offers extension methods for ServiceCollection: services.AddPrettyConsoleHelper(); or services.AddPrettyConsoleHelper(options =&gt; {
-options.
-})</PackageReleaseNotes>
+    <Version>1.0.4</Version>
+    <PackageReleaseNotes>Directly add headers and rows (any type of list of items) on the table when creating it. Added a InputHelper.Confirm() method.</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
   </PropertyGroup>
 
