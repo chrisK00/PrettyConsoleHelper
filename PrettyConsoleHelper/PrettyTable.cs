@@ -26,6 +26,8 @@ namespace PrettyConsoleHelper
             _rows = new List<List<string>>();
         }
 
+        public string Headers => string.Join(',', _headers);
+
         private List<string> GetFormattedHeaders(List<int> columnLengths)
         {
             var headers = new List<string>();
@@ -122,6 +124,35 @@ namespace PrettyConsoleHelper
             if (properties.Length > _headers.Count || properties.Length < _headers.Count)
             {
                 throw new ArgumentException($"Row items: {properties.Length} has to match the length of headers: {_headers.Count}");
+            }
+
+            foreach (var row in rows)
+            {
+                var values = properties.Select(x => x.GetValue(row));
+                _rows.Add(values.Select(x => $"{x}").ToList());
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds rows and headers using the generic class's property names
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="rows"></param>
+        /// <returns></returns>
+        public PrettyTable AddRowsWithDefaultHeaders<T>(IEnumerable<T> rows)
+        {
+            if (!rows.Any() || _headers.Any())
+            {
+                throw new ArgumentNullException(nameof(rows), "No items or headers are already defined");
+            }
+
+            var properties = rows.FirstOrDefault().GetType().GetProperties();
+
+            foreach (var item in properties)
+            {
+                _headers.Add(item.Name);
             }
 
             foreach (var row in rows)
