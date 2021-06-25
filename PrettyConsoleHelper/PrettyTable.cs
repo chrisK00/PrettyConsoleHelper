@@ -148,7 +148,9 @@ namespace PrettyConsoleHelper
                 throw new ArgumentNullException(nameof(rows), "No items or headers are already defined");
             }
 
-            var properties = rows.FirstOrDefault().GetType().GetProperties();
+            var properties = rows.FirstOrDefault()?.GetType()?.GetProperties();
+
+            _ = properties ?? throw new ArgumentNullException(nameof(rows), "First item in the list cannot be null");
 
             foreach (var item in properties)
             {
