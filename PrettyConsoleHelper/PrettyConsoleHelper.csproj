@@ -8,8 +8,8 @@
     <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleHelper</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageTags>ConsoleTable, console table, PrettyConsoleOutput, Input helper, console output, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner, dependency injection</PackageTags>
-    <Version>1.0.4</Version>
-    <PackageReleaseNotes>Directly add headers and rows (any type of list of items) on the table when creating it. Added a InputHelper.Confirm() method.</PackageReleaseNotes>
+    <Version>1.0.5</Version>
+    <PackageReleaseNotes>A way of adding headers without having to specify the names, just write any type of class. Able to add default headers at the same time when passing down rows. 3 lines of code to create an object, add items and headers, write to console thanks to a fluent api style.</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
   </PropertyGroup>
 
