@@ -49,7 +49,7 @@ var people = new List<Person>
                 new Person { Age = 15, Name = "NotChris" }
             };
 ```
-*Fastest Approach*: 
+*Fastest Approach* (first item in the list cannot be null since its used for getting the properties of the class): 
 ```cs          
 var tbl = new PrettyTable()
                 .AddRowsWithDefaultHeaders(people);
