@@ -41,7 +41,7 @@ var email = PrettyInputHelper.Validate(new EmailAddressAttribute(), "Enter email
 1. Create a new table 
 <br/> 
 *Fastest Approach*: 
-```cs
+```
 var people = new List<Person>
             {
                 new Person { Age = 50, Name = "Chris" },
@@ -51,6 +51,7 @@ var people = new List<Person>
 var tbl = new PrettyTable()
                 .AddRowsWithDefaultHeaders(people);
 ```
+
 *Fast Approach*: 
 ```cs
             var tbl = new PrettyTable()
