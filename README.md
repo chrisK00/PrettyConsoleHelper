@@ -39,9 +39,9 @@ var email = PrettyInputHelper.Validate(new EmailAddressAttribute(), "Enter email
 - **Options**: HeaderColor (default orange), Column Separator (default " | ")
 - Expect any values being null? No worries! You can even add headers and rows with null values if you wanted to test the table format
 1. Create a new table 
-<br/> 
+
 *Fastest Approach*: 
-```
+```cs 
 var people = new List<Person>
             {
                 new Person { Age = 50, Name = "Chris" },
@@ -51,7 +51,6 @@ var people = new List<Person>
 var tbl = new PrettyTable()
                 .AddRowsWithDefaultHeaders(people);
 ```
-
 *Fast Approach*: 
 ```cs
             var tbl = new PrettyTable()
@@ -66,7 +65,7 @@ Another approach
 var table = new PrettyTable("Id", "Name", "Age");
 ``` 
 
-2. Add Rows
+1. Add Rows
 ```cs 
 foreach (var person in people)
             {
