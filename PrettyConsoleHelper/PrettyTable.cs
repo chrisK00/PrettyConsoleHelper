@@ -77,6 +77,20 @@ namespace PrettyConsoleHelper
             return this;
         }
 
+        public PrettyTable AddDefaultHeaders<T>() where T : class
+        {
+            if (_rows.Any())
+            {
+                throw new InvalidOperationException("You can only add headers while there are no rows");
+            }
+
+            var properties = typeof(T).GetProperties();
+
+            _headers.AddRange(properties.Select(x => x.Name));
+
+            return this;
+        }
+
         /// <summary>
         /// Adds headers
         /// </summary>
