@@ -11,11 +11,11 @@ https://www.nuget.org/packages/PrettyConsoleHelper/
 # How to use
 
 ## Static classes
-After adding more options and testing i have made the classes non static. But dont worry! I have wrapped the former PrettyConsole and InputHelper in a static class. Simply add this on top of your usings
+I have wrapped the former PrettyConsole and InputHelper in a static class. Simply add this on top of your usings
 ```cs
 using static PrettyConsoleHelper.PrettyStatic;
 ``` 
-and now you can directly access `ConsolePretty.` and `PrettyInputHelper.` Or access the items using `PrettyStatic.`. 
+now you can directly access `ConsolePretty.` and `PrettyInputHelper.` Or access the items using `PrettyStatic.`. 
 
 ### ConsolePretty
 - You can still customize it by simply doing `ConsolePretty.Options = new PrettyConsoleOptions(prompt:"->");` in this case i just changed the default prompt
@@ -49,19 +49,35 @@ var people = new List<Person>
                 new Person { Age = 15, Name = "NotChris" }
             };
 ```
-*Fastest Approach* (first item in the list cannot be null since its used for getting the properties of the class): 
+Fastest approach: Adds rows, headers, writes to console without storing the table in a variable
+```cs
+new PrettyTable()
+                .AddRowsWithDefaultHeaders(people)
+                .Write();
+```
+
+I recommend storing it in a variable because then you can reuse it with the ResetTable method.
+
+*Fastest Approach*: 
 ```cs          
 var tbl = new PrettyTable()
                 .AddRowsWithDefaultHeaders(people);
 ```
-*Fast Approach*: 
+*Fast approach*:
+```cs
+var table = new PrettyTable()
+                .AddDefaultHeaders<Person>()
+                .AddRows(people)
+```
+
+*Another fast Approach*: 
 ```cs
             var tbl = new PrettyTable()
                 .AddHeaders("Name", "Age")
                 .AddRows(people);
 ```
 
-Another approach
+Traditional approach
 ```cs 
 var table = new PrettyTable("Id", "Name", "Age");
 
