@@ -112,14 +112,14 @@ namespace PrettyConsoleHelper
             _rows.Add(row.Select(x => $"{x}").ToList());
         }
 
-        public PrettyTable AddRows<T>(IEnumerable<T> rows)
+        public PrettyTable AddRows<T>(IEnumerable<T> rows) where T : class
         {
             if (!rows.Any())
             {
                 throw new ArgumentNullException(nameof(rows), "No items");
             }
 
-            var properties = rows.FirstOrDefault().GetType().GetProperties();
+            var properties = typeof(T).GetProperties();
 
             if (properties.Length > _headers.Count || properties.Length < _headers.Count)
             {
@@ -141,16 +141,14 @@ namespace PrettyConsoleHelper
         /// <typeparam name="T"></typeparam>
         /// <param name="rows"></param>
         /// <returns></returns>
-        public PrettyTable AddRowsWithDefaultHeaders<T>(IEnumerable<T> rows)
+        public PrettyTable AddRowsWithDefaultHeaders<T>(IEnumerable<T> rows) where T : class
         {
             if (!rows.Any() || _headers.Any())
             {
                 throw new ArgumentNullException(nameof(rows), "No items or headers are already defined");
             }
 
-            var properties = rows.FirstOrDefault()?.GetType()?.GetProperties();
-
-            _ = properties ?? throw new ArgumentNullException(nameof(rows), "First item in the list cannot be null");
+            var properties = typeof(T).GetProperties();
 
             foreach (var item in properties)
             {
@@ -179,7 +177,7 @@ namespace PrettyConsoleHelper
         /// Outputs the table to the console
         /// </summary>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Write()
+        public PrettyTable Write()
         {
             if (!_rows.Any())
             {
@@ -206,6 +204,7 @@ namespace PrettyConsoleHelper
             }
 
             Console.WriteLine(sb.ToString());
+            return this;
         }
     }
 }
