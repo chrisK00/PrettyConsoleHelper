@@ -73,6 +73,8 @@ foreach (var person in people)
 1. Print `table.Write();`<br/>     
 [![output.png](https://i.postimg.cc/wMX7tr1c/output.png)](https://postimg.cc/MfGWNdbv)
 
+if you would like to view the current headers in a comma separated string ``` tbl.Headers```
+
 ### PrettyConsole
 **Options**: You can choose default coloring for lots of stuff by passing down PrettyConsoleOptions 
 ```cs
