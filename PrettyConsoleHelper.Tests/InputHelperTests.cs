@@ -7,7 +7,8 @@ namespace PrettyConsoleHelper.Tests
 {
     public enum Season
     {
-        Summer
+        Summer,
+        Winter
     }
 
     public class InputHelperTests
@@ -30,7 +31,7 @@ namespace PrettyConsoleHelper.Tests
         [Fact]
         public void GetEnumInput_IsCaseInsensetive()
         {
-            _console.ReturnValue = "summer";
+            _console.ReturnValue = Season.Summer.ToString().ToLower();
             var result = _subject.GetEnumInput<Season>();
             result.Should().BeEquivalentTo(Season.Summer);
         }
@@ -61,7 +62,8 @@ namespace PrettyConsoleHelper.Tests
         [Fact]
         public void GetDateTime_ThrowsArgumentException_When_InvalidRange()
         {
-            FluentActions.Invoking(() => _subject.GetDateTime(minDateTime: new DateTime(2022, 12, 12), maxDateTime: new DateTime(2022, 1, 1)))
+            _subject.Invoking(_ => _.GetDateTime(
+               minDateTime: new DateTime(2022, 12, 12), maxDateTime: new DateTime(2022, 1, 1)))
               .Should().ThrowExactly<ArgumentException>();
         }
     }
