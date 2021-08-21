@@ -51,7 +51,7 @@ namespace PrettyConsoleHelper
 
             var input = Console.ReadLine().Trim().ToLower();
 
-            if (input == "y" || input == "yes")
+            if (input[0] == 'y')
             {
                 return true;
             }
