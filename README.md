@@ -117,6 +117,7 @@ Parse multiple arguments directly from the console using ParseOptions()
             optionsValues.TryGetValue(nameof(Todo.Title), out string title);
             optionsValues.TryGetValue(nameof(Todo.Description), out string description);
 ```
+[![example.png](https://i.postimg.cc/SNmpmyzj/example.png)](https://postimg.cc/rzZHJ2jL)
 ### Dependency injection
 **Options**: You can specify all the normal PrettyConsoleOptions
 - InputHelper and IPrettyConsole can be dependency injected
