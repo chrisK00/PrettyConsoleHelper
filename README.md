@@ -107,7 +107,7 @@ var console = new PrettyConsole(new PrettyConsoleOptions(numberColor: ConsoleCol
 
 Parse multiple arguments directly from the console using ParseOptions()
 ```cs
-If we have a Todo class we can do this:
+//If we have a Todo class we can do this:
 
   var inputHelper = new InputHelper();
             string[] options = { "-title", "-description" };
