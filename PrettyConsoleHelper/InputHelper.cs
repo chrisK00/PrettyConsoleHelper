@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace PrettyConsoleHelper
@@ -199,6 +202,103 @@ namespace PrettyConsoleHelper
                 else
                 {
                     _console.LogError($"Invalid input: {validator?.ErrorMessage}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the values from the input string out of a choosen set of options
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="inputs"></param>
+        /// <param name="prefixToRemove"></param>
+        /// <returns>The option ToTitleCase if a prefix will be removed and its corresponding value in a dictionary.</returns>
+        public static Dictionary<string, string> ParseOptions(string[] options, string[] inputs, string prefixToRemove = null)
+        {
+            var optionsValues = new Dictionary<string, string>();
+
+            var optionIndexes = options
+                .Where(x => inputs.Contains(x))
+                .Select((value) => (value, index: Array.IndexOf(inputs, value)))
+                .OrderBy(x => x.index).ToArray();
+
+            for (int i = 0; i < optionIndexes.Length; i++)
+            {
+                var valueStartIndex = 0;
+                var valueEndIndex = 0;
+
+                var nextIndex = i + 1;
+
+                if (nextIndex == optionIndexes.Length) //last option
+                {
+                    valueStartIndex = optionIndexes[i].index + 1; //value comes after the option
+                    valueEndIndex = inputs.Length;
+                }
+                else
+                {
+                    valueStartIndex = optionIndexes[i].index + 1;
+                    valueEndIndex = optionIndexes[nextIndex].index;
+                }
+
+                var values = inputs[valueStartIndex..valueEndIndex];
+                var value = string.Join(' ', values);
+
+                if (!string.IsNullOrWhiteSpace(prefixToRemove))
+                {
+                    var formattedOption = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(optionIndexes[i].value.Replace(prefixToRemove, string.Empty));
+                    optionsValues.Add(formattedOption, value);
+                }
+                else
+                {
+                    optionsValues.Add(optionIndexes[i].value, value);
+                }
+            }
+
+            return optionsValues;
+        }
+
+        /// <summary>
+        /// Just like the ParseOptions but uses Deferred execution/Lazy loading with the yield keyword
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <param name="options"></param>
+        /// <param name="prefixToRemove"></param>
+        /// <returns></returns>
+        public static IEnumerable<(string option, string value)> ParseOptionsYield(string[] inputs, string[] options, string prefixToRemove = null)
+        {
+            var optionIndexes = options
+                .Where(x => inputs.Contains(x))
+                .Select((value) => (value, index: Array.IndexOf(inputs, value)))
+                .OrderBy(x => x.index).ToArray();
+
+            for (int i = 0; i < optionIndexes.Length; i++)
+            {
+                var valueStartIndex = 0;
+                var valueEndIndex = 0;
+
+                var nextIndex = i + 1;
+
+                if (nextIndex == optionIndexes.Length) //last option
+                {
+                    valueStartIndex = optionIndexes[i].index + 1; //value comes after the option
+                    valueEndIndex = inputs.Length;
+                }
+                else
+                {
+                    valueStartIndex = optionIndexes[i].index + 1;
+                    valueEndIndex = optionIndexes[nextIndex].index;
+                }
+
+                var values = inputs[valueStartIndex..valueEndIndex];
+                var value = string.Join(' ', values);
+                if (!string.IsNullOrWhiteSpace(prefixToRemove))
+                {
+                    var formattedOption = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(optionIndexes[i].value.Replace(prefixToRemove, string.Empty));
+                    yield return (formattedOption, value);
+                }
+                else
+                {
+                    yield return (optionIndexes[i].value, value);
                 }
             }
         }
