@@ -103,7 +103,20 @@ var console = new PrettyConsole(new PrettyConsoleOptions(numberColor: ConsoleCol
 var console = new PrettyConsole(new PrettyConsoleOptions(numberColor: ConsoleColor.Red));
             var inputHelper = new InputHelper(console);
 ```
-            
+- Contains methods for taking in int input, confirming, enums, datetime input, validating input
+
+Parse multiple arguments directly from the console using ParseOptions()
+```cs
+If we have a Todo class we can do this:
+
+  var inputHelper = new InputHelper();
+            string[] options = { "-title", "-description" };
+            string[] inputs = Console.ReadLine().Split(' ');
+
+            var optionsValues = inputHelper.ParseOptions(options, inputs, "-");
+            optionsValues.TryGetValue(nameof(Todo.Title), out string title);
+            optionsValues.TryGetValue(nameof(Todo.Description), out string description);
+```
 ### Dependency injection
 **Options**: You can specify all the normal PrettyConsoleOptions
 - InputHelper and IPrettyConsole can be dependency injected
