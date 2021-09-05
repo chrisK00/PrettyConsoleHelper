@@ -94,14 +94,18 @@ namespace PrettyConsoleHelper.Tests
             result[options[1]].Should().Be(inputsWithoutOptions[1]);
         }
 
-        [Fact(Skip = "")]
-        public void ParseOptionsYield_Returns_EnteredOptionsWithEmptyString_If_NoValueIsEntered()
-        {
-        }
-
-        [Fact(Skip = "")]
+        [Fact]
         public void ParseOptions_Returns_Options_Without_PrefixAndToTitleCase()
         {
+            string[] inputsWithoutOptions = { "clean room", "yep" };
+            string[] options = { "-title", "-completed" };
+            string[] inputs = { options[0], inputsWithoutOptions[0], options[1], inputsWithoutOptions[1]};
+
+            var result = _subject.ParseOptions(options, inputs, "-");
+
+            result.Count.Should().Be(options.Length);
+
+            result.Keys.Should().Contain("Title");
         }
     }
 }

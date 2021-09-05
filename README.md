@@ -1,6 +1,6 @@
 # PrettyConsoleHelper
 
-A Library for Console apps that provides a prettier and easier experience with output and input parsing/validating 
+A small and quickly made Library for Console apps that provides a prettier and easier experience with output and input parsing/validating while helping beginners avoid tedious tasks 
 
 
 Includes a InputHelper, ConsoleTable and ConsoleOutput

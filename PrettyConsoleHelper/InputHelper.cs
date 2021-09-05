@@ -262,52 +262,5 @@ namespace PrettyConsoleHelper
 
             return optionsValues;
         }
-
-        /// <summary>
-        /// Just like the ParseOptions but uses Deferred execution/Lazy loading with the yield keyword
-        /// Returns the option and an empty string if no value was inputted for an option
-        /// </summary>
-        /// <param name="inputs"></param>
-        /// <param name="options"></param>
-        /// <param name="prefixToRemove"></param>
-        /// <returns></returns>
-        public IEnumerable<(string option, string value)> ParseOptionsYield(string[] inputs, string[] options, string prefixToRemove = null)
-        {
-            var optionIndexes = options
-                .Where(x => inputs.Contains(x))
-                .Select((value) => (value, index: Array.IndexOf(inputs, value)))
-                .OrderBy(x => x.index).ToArray();
-
-            for (int i = 0; i < optionIndexes.Length; i++)
-            {
-                var valueStartIndex = 0;
-                var valueEndIndex = 0;
-                var nextIndex = i + 1;
-
-                if (nextIndex == optionIndexes.Length) //last option
-                {
-                    valueStartIndex = optionIndexes[i].index + 1; //value comes after the option
-                    valueEndIndex = inputs.Length;
-                }
-                else
-                {
-                    valueStartIndex = optionIndexes[i].index + 1;
-                    valueEndIndex = optionIndexes[nextIndex].index;
-                }
-
-                var values = inputs[valueStartIndex..valueEndIndex];
-                var value = string.Join(' ', values);
-
-                if (!string.IsNullOrWhiteSpace(prefixToRemove))
-                {
-                    var formattedOption = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(optionIndexes[i].value.Replace(prefixToRemove, string.Empty));
-                    yield return (formattedOption, value);
-                }
-                else
-                {
-                    yield return (optionIndexes[i].value, value);
-                }
-            }
-        }
     }
 }
