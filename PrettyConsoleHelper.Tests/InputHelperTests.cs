@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System;
+using System.Linq;
 using Xunit;
 
 
@@ -65,6 +66,42 @@ namespace PrettyConsoleHelper.Tests
             _subject.Invoking(_ => _.GetDateTime(
                minDateTime: new DateTime(2022, 12, 12), maxDateTime: new DateTime(2022, 1, 1)))
               .Should().ThrowExactly<ArgumentException>();
+        }
+
+        [Fact]
+        public void ParseOptions_DoesNotReturn_Options_When_ThereAreNoValues()
+        {
+            string[] options = { "-title", "-completed" };
+            var result = _subject.ParseOptions(options, options);
+            result.Count.Should().Be(0);
+        }
+
+        [Fact]
+        public void ParseOptions_Returns_OptionsWithValues()
+        {
+            string[] inputsWithoutOptions = { "clean room", "yes" };
+            string[] options = { "-title", "-completed" };
+            string[] inputs = { options[0], inputsWithoutOptions[0], options[1], inputsWithoutOptions[1] };
+
+            var result = _subject.ParseOptions(options, inputs);
+
+            result.Count.Should().Be(options.Length);
+
+            result[options[0]].Should().NotBeEmpty();
+            result[options[1]].Should().NotBeEmpty();
+
+            result[options[0]].Should().Be(inputsWithoutOptions[0]);
+            result[options[1]].Should().Be(inputsWithoutOptions[1]);
+        }
+
+        [Fact(Skip = "")]
+        public void ParseOptionsYield_Returns_EnteredOptionsWithEmptyString_If_NoValueIsEntered()
+        {
+        }
+
+        [Fact(Skip = "")]
+        public void ParseOptions_Returns_Options_Without_PrefixAndToTitleCase()
+        {
         }
     }
 }

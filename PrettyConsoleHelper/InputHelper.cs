@@ -208,12 +208,13 @@ namespace PrettyConsoleHelper
 
         /// <summary>
         /// Gets the values from the input string out of a choosen set of options
+        /// Use .TryGetValue(nameof(Class.PropertyName)) on the returned result
         /// </summary>
         /// <param name="options"></param>
         /// <param name="inputs"></param>
         /// <param name="prefixToRemove"></param>
         /// <returns>The option ToTitleCase if a prefix will be removed and its corresponding value in a dictionary.</returns>
-        public static Dictionary<string, string> ParseOptions(string[] options, string[] inputs, string prefixToRemove = null)
+        public Dictionary<string, string> ParseOptions(string[] options, string[] inputs, string prefixToRemove = null)
         {
             var optionsValues = new Dictionary<string, string>();
 
@@ -226,7 +227,6 @@ namespace PrettyConsoleHelper
             {
                 var valueStartIndex = 0;
                 var valueEndIndex = 0;
-
                 var nextIndex = i + 1;
 
                 if (nextIndex == optionIndexes.Length) //last option
@@ -241,6 +241,12 @@ namespace PrettyConsoleHelper
                 }
 
                 var values = inputs[valueStartIndex..valueEndIndex];
+
+                if (values.Length < 1) //no value inputted
+                {
+                    continue;
+                }
+
                 var value = string.Join(' ', values);
 
                 if (!string.IsNullOrWhiteSpace(prefixToRemove))
@@ -259,12 +265,13 @@ namespace PrettyConsoleHelper
 
         /// <summary>
         /// Just like the ParseOptions but uses Deferred execution/Lazy loading with the yield keyword
+        /// Returns the option and an empty string if no value was inputted for an option
         /// </summary>
         /// <param name="inputs"></param>
         /// <param name="options"></param>
         /// <param name="prefixToRemove"></param>
         /// <returns></returns>
-        public static IEnumerable<(string option, string value)> ParseOptionsYield(string[] inputs, string[] options, string prefixToRemove = null)
+        public IEnumerable<(string option, string value)> ParseOptionsYield(string[] inputs, string[] options, string prefixToRemove = null)
         {
             var optionIndexes = options
                 .Where(x => inputs.Contains(x))
@@ -275,7 +282,6 @@ namespace PrettyConsoleHelper
             {
                 var valueStartIndex = 0;
                 var valueEndIndex = 0;
-
                 var nextIndex = i + 1;
 
                 if (nextIndex == optionIndexes.Length) //last option
@@ -291,6 +297,7 @@ namespace PrettyConsoleHelper
 
                 var values = inputs[valueStartIndex..valueEndIndex];
                 var value = string.Join(' ', values);
+
                 if (!string.IsNullOrWhiteSpace(prefixToRemove))
                 {
                     var formattedOption = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(optionIndexes[i].value.Replace(prefixToRemove, string.Empty));
