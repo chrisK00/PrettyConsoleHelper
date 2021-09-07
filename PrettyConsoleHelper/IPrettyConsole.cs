@@ -7,7 +7,7 @@ namespace PrettyConsoleHelper
         PrettyConsoleOptions Options { get; init; }
         void Write(char value, int times, ConsoleColor color = ConsoleColor.White);
         void Write(object value, ConsoleColor color);
-        public void Write(string text);
+        void Write(string text);
 
         /// <summary>
         /// Writes text to console using default console color
