@@ -262,18 +262,20 @@ namespace PrettyConsoleHelper
         public void PrintGenericTypeList<T>(IEnumerable<T> items, string message = null) where T : class
         {
             var type = typeof(T);
-            message ??= $"Select a {type.Name}";
             var propertyInfos = type.GetProperties();
 
-            Console.WriteLine(message);
+            var sb = new StringBuilder().AppendLine(message ?? $"Select a {type.Name}");
+
             foreach (var item in items)
             {
                 foreach (var property in propertyInfos)
                 {
-                    Console.Write($" {property.GetValue(item)} ");
+                    sb.Append(" ").Append(property.GetValue(item)).Append(" ");
                 }
-                Console.WriteLine();
+                sb.AppendLine();
             }
+
+            Console.WriteLine(sb.ToString());
         }
 
         /// <summary>
