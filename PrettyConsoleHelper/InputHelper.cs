@@ -54,11 +54,7 @@ namespace PrettyConsoleHelper
 
             var input = Console.ReadLine().Trim().ToLower();
 
-            if (input[0] == 'y')
-            {
-                return true;
-            }
-            return false;
+            return input[0] == 'y';
         }
 
         /// <summary>
@@ -261,6 +257,146 @@ namespace PrettyConsoleHelper
             }
 
             return optionsValues;
+        }
+
+        public void PrintGenericTypeList<T>(IEnumerable<T> items, string message = null) where T : class
+        {
+            var type = typeof(T);
+            message ??= $"Select a {type.Name}";
+            var propertyInfos = type.GetProperties();
+
+            Console.WriteLine(message);
+            foreach (var item in items)
+            {
+                foreach (var property in propertyInfos)
+                {
+                    Console.Write($" {property.GetValue(item)} ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Make sure to add items to the table before calling this method
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public T Select<T>(IList<T> items, PrettyTable table) where T : class
+        {
+            if (table == null || table.RowCount < 1)
+            {
+                return null;
+            }
+
+            Console.Clear();
+            var (Left, Top) = Console.GetCursorPosition();
+            var topMargin = 2;
+            Left = 2;
+            Top += topMargin;
+
+            table.Write();
+
+            var count = items.Count;
+            var currentIndex = 0;
+            var key = ConsoleKey.Zoom;
+
+            while (key != ConsoleKey.Enter)
+            {
+                Console.SetCursorPosition(Left, Top);
+                key = Console.ReadKey().Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.DownArrow or ConsoleKey.S:
+                        if ((currentIndex + 1) == count) //last item
+                        {
+                            currentIndex = 0;
+                            Top = topMargin;
+                        }
+                        else
+                        {
+                            currentIndex++;
+                            Top += topMargin;
+                        }
+                        break;
+                    case ConsoleKey.UpArrow or ConsoleKey.W:
+                        if ((currentIndex - 1) < 0) //first item
+                        {
+                            currentIndex = count - 1;
+                            Top = count * topMargin;
+                        }
+                        else
+                        {
+                            currentIndex--;
+                            Top -= topMargin;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            Console.Clear();
+            return items[currentIndex];
+        }
+
+        public T Select<T>(IList<T> items, string message = null) where T : class
+        {
+            if (items.Count < 1)
+            {
+                return null;
+            }
+
+            Console.Clear();
+            var (Left, Top) = Console.GetCursorPosition();
+            Left++;
+            Top++;
+            PrintGenericTypeList(items, message);
+
+            var count = items.Count;
+            var currentIndex = 0;
+            var key = ConsoleKey.Zoom;
+
+            while (key != ConsoleKey.Enter)
+            {
+                Console.SetCursorPosition(Left, Top);
+                key = Console.ReadKey().Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.DownArrow or ConsoleKey.S:
+                        if ((currentIndex + 1) == count) //last item
+                        {
+                            currentIndex = 0;
+                            Top = 1;
+                        }
+                        else
+                        {
+                            currentIndex++;
+                            Top++;
+                        }
+                        break;
+                    case ConsoleKey.UpArrow or ConsoleKey.W:
+                        if ((currentIndex - 1) < 0) //first item
+                        {
+                            currentIndex = count - 1;
+                            Top = count;
+                        }
+                        else
+                        {
+                            currentIndex--;
+                            Top--;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            Console.Clear();
+            return items[currentIndex];
         }
     }
 }
