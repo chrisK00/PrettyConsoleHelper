@@ -118,6 +118,15 @@ Parse multiple arguments directly from the console using ParseOptions()
             optionsValues.TryGetValue(nameof(Todo.Description), out string description);
 ```
 [![example.png](https://i.postimg.cc/SNmpmyzj/example.png)](https://postimg.cc/rzZHJ2jL)
+
+
+We might want the user to pick an item from a list of items, this is done by utilizing the .Select() method that has 2 overloads
+[![Umc-Bz-M096-P.gif](https://i.postimg.cc/j29y2RX6/Umc-Bz-M096-P.gif)](https://postimg.cc/kRQ2h3LD)
+
+Another alternative that does not use a table
+[![MPIn-Mk-Uj5-F.gif](https://i.postimg.cc/rw2tPnYp/MPIn-Mk-Uj5-F.gif)](https://postimg.cc/gn4JwDp9)
+
+
 ### Dependency injection
 **Options**: You can specify all the normal PrettyConsoleOptions
 - InputHelper and IPrettyConsole can be dependency injected
