@@ -270,7 +270,7 @@ namespace PrettyConsoleHelper
             {
                 foreach (var property in propertyInfos)
                 {
-                    sb.Append(" ").Append(property.GetValue(item)).Append(" ");
+                    sb.Append(' ').Append(property.GetValue(item)).Append(' ');
                 }
                 sb.AppendLine();
             }
@@ -307,7 +307,7 @@ namespace PrettyConsoleHelper
             while (key != ConsoleKey.Enter)
             {
                 Console.SetCursorPosition(Left, Top);
-                key = Console.ReadKey().Key;
+                key = Console.ReadKey(true).Key;
 
                 switch (key)
                 {
@@ -364,7 +364,7 @@ namespace PrettyConsoleHelper
             while (key != ConsoleKey.Enter)
             {
                 Console.SetCursorPosition(Left, Top);
-                key = Console.ReadKey().Key;
+                key = Console.ReadKey(true).Key;
 
                 switch (key)
                 {
