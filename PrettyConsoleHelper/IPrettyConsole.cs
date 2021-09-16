@@ -6,6 +6,7 @@ namespace PrettyConsoleHelper
     {
         PrettyConsoleOptions Options { get; init; }
         void Write(char value, int times, ConsoleColor color = ConsoleColor.White);
+        ConsoleKeyInfo ReadKey(bool dontShowKey);
         void Write(object value, ConsoleColor color);
         void Write(string text);
 

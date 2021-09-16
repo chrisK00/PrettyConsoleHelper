@@ -12,7 +12,7 @@ namespace PrettyConsoleHelper
         {
             Options = options ?? new PrettyConsoleOptions();
         }
-        
+
         public PrettyConsole(IOptions<PrettyConsoleOptions> options)
         {
             Options = options.Value;
@@ -146,6 +146,11 @@ namespace PrettyConsoleHelper
             }
 
             WriteLine(sb.ToString(), ConsoleColor.Magenta);
+        }
+
+        public ConsoleKeyInfo ReadKey(bool dontShowKey = false)
+        {
+            return Console.ReadKey(dontShowKey);
         }
     }
 }

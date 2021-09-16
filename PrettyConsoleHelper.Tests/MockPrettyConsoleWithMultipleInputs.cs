@@ -3,27 +3,19 @@ using System.Collections.Generic;
 
 namespace PrettyConsoleHelper.Tests
 {
-
-    public class MockPrettyConsole : IPrettyConsole
+    public class MockPrettyConsoleWithMultipleInputs : IPrettyConsole
     {
-        public MockPrettyConsole()
-        {
-            Options = new PrettyConsoleOptions();
-        }
-
+        public List<string> LinesToRead { get; set; } = new();
         public List<ConsoleKeyInfo> KeysToRead { get; set; } = new();
 
         public PrettyConsoleOptions Options { get; init; }
-        public string ReturnValue { get; set; }
 
         public void LogError(string message, Exception ex = null)
         {
-            return;
         }
 
         public void LogWarning(string message, Exception ex = null)
         {
-            return;
         }
 
         public ConsoleKeyInfo ReadKey(bool dontShowKey)
@@ -36,68 +28,58 @@ namespace PrettyConsoleHelper.Tests
 
         public string ReadLine()
         {
-            return ReturnValue;
+            var indexOfFirstItem = 0;
+            var line = LinesToRead[indexOfFirstItem];
+            LinesToRead.RemoveAt(indexOfFirstItem);
+            return line;
         }
 
         public void Write(char value, int times, ConsoleColor color = ConsoleColor.White)
         {
-            return;
         }
 
         public void Write(object value, ConsoleColor color)
         {
-            return;
-        }
-
-        public void Write(string text, bool prompt)
-        {
-            return;
-        }
-
-        public void Write(int value, ConsoleColor color)
-        {
-            return;
-        }
-
-        public void Write(string text, ConsoleColor color, bool prompt)
-        {
-            return;
-
-        }
-
-        public void Write(int value)
-        {
-            return;
         }
 
         public void Write(string text)
         {
-            throw new NotImplementedException();
+        }
+
+        public void Write(string text, bool prompt)
+        {
+        }
+
+        public void Write(int value, ConsoleColor color)
+        {
+        }
+
+        public void Write(string text, ConsoleColor color, bool prompt)
+        {
+        }
+
+        public void Write(int value)
+        {
         }
 
         public void WriteLine(object value)
         {
-            return;
         }
 
         public void WriteLine(object value, ConsoleColor color)
         {
-            return;
         }
 
         public void WriteLine(string text)
         {
-            return;
         }
 
         public void WriteLine(string text, ConsoleColor color)
         {
-            return;
         }
 
         public void WriteLine(char value, int times, ConsoleColor color = ConsoleColor.White)
         {
-            return;
         }
     }
 }

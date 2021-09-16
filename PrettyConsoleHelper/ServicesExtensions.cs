@@ -12,13 +12,13 @@ namespace PrettyConsoleHelper
                 services.Configure(consoleOptions);
             }
             services.AddSingleton<IPrettyConsole, PrettyConsole>();
-            services.AddSingleton<InputHelper>();
+            services.AddSingleton<IInputHelper, InputHelper>();
         }
 
         public static void AddPrettyConsoleHelper(this IServiceCollection services)
         {
             services.AddSingleton<IPrettyConsole, PrettyConsole>();
-            services.AddSingleton<InputHelper>();
+            services.AddSingleton<IInputHelper, InputHelper>();
         }
     }
 }

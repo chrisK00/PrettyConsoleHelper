@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PrettyConsoleHelper
 {
-    public class InputHelper
+    public class InputHelper : IInputHelper
     {
         private readonly IPrettyConsole _console;
 
@@ -52,7 +52,7 @@ namespace PrettyConsoleHelper
         {
             _console.Write(message, true);
 
-            var input = Console.ReadLine().Trim().ToLower();
+            var input = _console.ReadLine().Trim().ToLower();
 
             return input[0] == 'y';
         }
@@ -275,7 +275,7 @@ namespace PrettyConsoleHelper
                 sb.AppendLine();
             }
 
-            Console.WriteLine(sb.ToString());
+            _console.WriteLine(sb.ToString());
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace PrettyConsoleHelper
             while (key != ConsoleKey.Enter)
             {
                 Console.SetCursorPosition(Left, Top);
-                key = Console.ReadKey(true).Key;
+                key = _console.ReadKey(true).Key;
 
                 switch (key)
                 {
@@ -364,7 +364,7 @@ namespace PrettyConsoleHelper
             while (key != ConsoleKey.Enter)
             {
                 Console.SetCursorPosition(Left, Top);
-                key = Console.ReadKey(true).Key;
+                key = _console.ReadKey(true).Key;
 
                 switch (key)
                 {
