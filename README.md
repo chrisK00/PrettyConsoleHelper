@@ -1,7 +1,6 @@
 # PrettyConsoleHelper
 
-A small and quickly made Library for Console apps that provides a prettier and easier experience with output and input parsing/validating while helping beginners avoid tedious tasks. It will also wrap the Console class in an interface in order to make ReadLines and ReadKeys testable 
-
+A small and quickly made Library for Console apps that provides a prettier and easier experience with output and input parsing/validating while helping beginners avoid tedious tasks. It will also wrap the Console class in an interface in order to make ReadLines and ReadKeys testable. The source code is nowhere near structured/optimal as the purpose of this project is to improve the console developing experience.
 
 Includes a InputHelper, ConsoleTable and ConsoleOutput
 
