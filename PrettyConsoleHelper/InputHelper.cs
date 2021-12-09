@@ -357,13 +357,44 @@ namespace PrettyConsoleHelper
             Top++;
             PrintGenericTypeList(items, message);
 
-            var count = items.Count;
-            var currentIndex = 0;
+            var selectedIndex = HandleSelect(Left, Top, items.Count);
+
+            return items[selectedIndex];
+        }
+
+        public TEnum Select<TEnum>(string message = null) where TEnum : struct
+        {
+            var enumType = typeof(TEnum);
+            if (!enumType.IsEnum) throw new ArgumentException("Not an enum");
+
+            Console.Clear();
+            var (Left, Top) = Console.GetCursorPosition();
+            Left++;
+            Top++;
+
+            var sb = new StringBuilder();
+            var enumNames = enumType.GetEnumNames();
+            foreach (var item in enumNames)
+            {
+                sb.AppendLine(item);
+            }
+
+            Console.WriteLine(message ?? $"Select a {enumType.Name}");
+            Console.WriteLine(sb.ToString());
+
+            var selectedIndex = HandleSelect(Left, Top, enumNames.Length);
+
+            return Enum.Parse<TEnum>(enumNames[selectedIndex]);
+        }
+
+        private int HandleSelect(int left, int top, int count)
+        {
             var key = ConsoleKey.Zoom;
+            var currentIndex = 0;
 
             while (key != ConsoleKey.Enter)
             {
-                Console.SetCursorPosition(Left, Top);
+                Console.SetCursorPosition(left, top);
                 key = _console.ReadKey(true).Key;
 
                 switch (key)
@@ -372,24 +403,24 @@ namespace PrettyConsoleHelper
                         if ((currentIndex + 1) == count) //last item
                         {
                             currentIndex = 0;
-                            Top = 1;
+                            top = 1;
                         }
                         else
                         {
                             currentIndex++;
-                            Top++;
+                            top++;
                         }
                         break;
                     case ConsoleKey.UpArrow or ConsoleKey.W:
                         if ((currentIndex - 1) < 0) //first item
                         {
                             currentIndex = count - 1;
-                            Top = count;
+                            top = count;
                         }
                         else
                         {
                             currentIndex--;
-                            Top--;
+                            top--;
                         }
                         break;
                     default:
@@ -398,7 +429,8 @@ namespace PrettyConsoleHelper
             }
 
             Console.Clear();
-            return items[currentIndex];
+
+            return currentIndex;
         }
     }
 }
