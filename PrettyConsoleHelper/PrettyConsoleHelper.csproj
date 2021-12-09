@@ -8,8 +8,8 @@
     <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleHelper</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageTags>Parser, ConsoleParser, CMDParser, ConsoleTable, console table, PrettyConsoleOutput, Input helper, console output, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner, dependency injection</PackageTags>
-    <Version>1.0.7</Version>
-    <PackageReleaseNotes>Let the user select an item from a list of items using Up/Down arrow key or W/S on the keyboard. Works with a prettytable aswell!</PackageReleaseNotes>
+    <Version>1.0.9</Version>
+    <PackageReleaseNotes>Enum Select List</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
