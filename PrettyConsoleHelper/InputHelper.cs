@@ -284,7 +284,7 @@ namespace PrettyConsoleHelper
         /// <typeparam name="T"></typeparam>
         /// <param name="items"></param>
         /// <param name="table"></param>
-        /// <returns></returns>
+        /// <returns>The selected item of type <typeparamref name="T"/></returns>
         public T Select<T>(IList<T> items, PrettyTable table) where T : class
         {
             if (table == null || table.RowCount < 1)
@@ -335,8 +335,6 @@ namespace PrettyConsoleHelper
                             Top -= topMargin;
                         }
                         break;
-                    default:
-                        break;
                 }
             }
 
@@ -344,18 +342,41 @@ namespace PrettyConsoleHelper
             return items[currentIndex];
         }
 
-        public T Select<T>(IList<T> items, string message = null) where T : class
+        private (int LeftPos, int TopPos) PrepareSelect()
+        {
+            Console.Clear();
+            var cursorPos = Console.GetCursorPosition();
+            cursorPos.Left++;
+            cursorPos.Top++;
+            return cursorPos;
+        }
+
+        private void PrintFormattedList<T>(IList<T> items, Func<T, object> format, string message = null)
+        {
+            var formattedItems = items.Select(format).ToArray();
+            var sb = new StringBuilder().AppendLine(message ?? $"Select a {typeof(T).Name}");
+
+            foreach (var item in formattedItems)
+            {
+                sb.Append(' ').Append(item).Append(' ').AppendLine();
+            }
+
+            _console.WriteLine(sb.ToString());
+        }
+
+        public T Select<T>(IList<T> items, string message = null, Func<T, object> format = null) where T : class
         {
             if (items.Count < 1)
             {
                 return null;
             }
 
-            Console.Clear();
-            var (Left, Top) = Console.GetCursorPosition();
-            Left++;
-            Top++;
-            PrintGenericTypeList(items, message);
+            var (Left, Top) = PrepareSelect();
+
+            if (format is null)
+                PrintGenericTypeList(items, message);
+            else
+                PrintFormattedList(items, format, message);
 
             var selectedIndex = HandleSelect(Left, Top, items.Count);
 
@@ -367,20 +388,16 @@ namespace PrettyConsoleHelper
             var enumType = typeof(TEnum);
             if (!enumType.IsEnum) throw new ArgumentException("Not an enum");
 
-            Console.Clear();
-            var (Left, Top) = Console.GetCursorPosition();
-            Left++;
-            Top++;
+            var (Left, Top) = PrepareSelect();
 
             var sb = new StringBuilder();
             var enumNames = enumType.GetEnumNames();
-            foreach (var item in enumNames)
-            {
-                sb.AppendLine(item);
-            }
 
-            Console.WriteLine(message ?? $"Select a {enumType.Name}");
-            Console.WriteLine(sb.ToString());
+            foreach (var item in enumNames)
+                sb.Append(' ').AppendLine(item);
+
+            _console.WriteLine(message ?? $"Select a {enumType.Name}");
+            _console.WriteLine(sb.ToString());
 
             var selectedIndex = HandleSelect(Left, Top, enumNames.Length);
 
@@ -422,8 +439,6 @@ namespace PrettyConsoleHelper
                             currentIndex--;
                             top--;
                         }
-                        break;
-                    default:
                         break;
                 }
             }
