@@ -4,6 +4,7 @@ namespace PrettyConsoleHelper
 {
     public interface IPrettyConsole
     {
+        public static IPrettyConsole Console = new PrettyConsole();
         PrettyConsoleOptions Options { get; init; }
         void Write(char value, int times, ConsoleColor color = ConsoleColor.White);
         ConsoleKeyInfo ReadKey(bool dontShowKey);

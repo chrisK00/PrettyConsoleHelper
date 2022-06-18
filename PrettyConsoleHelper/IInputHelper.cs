@@ -6,6 +6,7 @@ namespace PrettyConsoleHelper
 {
     public interface IInputHelper
     {
+        public static IInputHelper Input = new InputHelper(IPrettyConsole.Console);
         bool Confirm(string message = "Enter (y/n)");
         DateTime GetDateTime(string message = "Enter a date", DateTime? minDateTime = null, DateTime? maxDateTime = null);
         TEnum GetEnumInput<TEnum>() where TEnum : struct;
