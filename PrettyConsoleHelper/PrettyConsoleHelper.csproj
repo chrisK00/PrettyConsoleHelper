@@ -8,8 +8,8 @@
     <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleHelper</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageTags>Parser, ConsoleParser, CMDParser, ConsoleTable, console table, PrettyConsoleOutput, Input helper, console output, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner, dependency injection</PackageTags>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>target .net 6</PackageReleaseNotes>
+    <Version>1.1.1</Version>
+    <PackageReleaseNotes>add select enum to interface. ability to easily specify a format for select list items</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
