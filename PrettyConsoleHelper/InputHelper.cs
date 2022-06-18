@@ -19,7 +19,7 @@ namespace PrettyConsoleHelper
 
         public InputHelper()
         {
-            _console = PrettyStatic.ConsolePretty;
+            _console = IPrettyConsole.Console;
         }
 
         /// <summary>
