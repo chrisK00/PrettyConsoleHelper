@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>chrisK00</Authors>
     <Description>Library for Console apps with prettier and easier experience with output and input parsing/validating. Includes a Console table (rows and columns), Input helper and a console output class. Beginner friendly and compatible with Dependency Injection</Description>
     <Copyright>MIT</Copyright>
     <RepositoryUrl>https://github.com/chrisK00/PrettyConsoleHelper</RepositoryUrl>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageTags>Parser, ConsoleParser, CMDParser, ConsoleTable, console table, PrettyConsoleOutput, Input helper, console output, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner, dependency injection</PackageTags>
-    <Version>1.0.9</Version>
-    <PackageReleaseNotes>Enum Select List</PackageReleaseNotes>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>target .net 6</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
