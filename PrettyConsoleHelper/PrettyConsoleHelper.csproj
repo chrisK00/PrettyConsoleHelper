@@ -9,7 +9,7 @@
     <PackageProjectUrl></PackageProjectUrl>
     <PackageTags>Parser, ConsoleParser, CMDParser, ConsoleTable, console table, PrettyConsoleOutput, Input helper, console output, Input, Output, InputValidation, PrettyOutput, Table, OutputHelper, InputHelper, Console, beginner, dependency injection</PackageTags>
     <Version>1.1.1</Version>
-    <PackageReleaseNotes>add select enum to interface. ability to easily specify a format for select list items</PackageReleaseNotes>
+    <PackageReleaseNotes>add select enum to interface. ability to easily specify a format for select list items. place static instances inside the interfaces</PackageReleaseNotes>
     <PackageId>PrettyConsoleHelper</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
